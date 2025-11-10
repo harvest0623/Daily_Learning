@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    list-style: none;
+}
+.head{
+    height: 114px;
+    font-size: 0;
+    padding: 0 171px;
+    display: flex;
+}
+.head_nav, .head_user{
+    display: inline-block;
+    width: 50%;
+    font-size: 16px;
+}
+.head_nav{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.nav, .logo{
+    display: inline-block;
+}
+.nav ul{
+    display: flex;
+}
+.logo{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+}
+.logo img{
+    width: 100%;
+}
+.nav ul li{
+    margin-left: 42px;
+}
+
+.head_user{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.login{
+    width: 57px;
+    height: 43px;
+    color: #4B5563;
+    border: none;
+    background-color: white;
+}
+.register{
+    width: 57px;
+    height: 43px;
+    color: white;
+    background-color: black;
+}
