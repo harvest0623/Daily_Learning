@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单例弹框</title>
+    <style>
+        #modal{
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn1">open1</button>
+    <button id="btn2">open2</button>
+    <button id="close">close</button>
+
+    <script>
+        const Modal = (function() {
+            let modal = null;
+            return function() {
+                if(!modal){
+                    modal = document.createElement('div'); // <div id='modal'>我是一个全局弹框</div>
+                    modal.innerHTML = '我是一个全局弹框';
+                    modal.id = 'modal';
+                    modal.style.display = 'none';
+                    document.body.appendChild(modal);
+                }
+                return modal;
+            }
+        })()
+        document.getElementById('btn1').addEventListener('click', function(){
+            const modal = new Modal();
+            modal.style.display = 'block';
+        })
+        document.getElementById('btn2').addEventListener('click', function(){
+            const modal = new Modal();
+            modal.style.display = 'block';
+        })
+        document.getElementById('close').addEventListener('click', function(){
+            const modal = new Modal();
+            modal.style.display = 'none';
+        })
+    </script>
+</body>
+</html>
