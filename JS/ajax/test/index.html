@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    账号：<input type="text" id="username">
+    密码：<input type="text" id="password">
+    <button id="btn">提交</button>
+    <script>
+        // 给按钮绑定点击事件
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        let btn = document.getElementById('btn');
+        // 向后端 url 发送请求，并将真实的账号密码携带在 url 中
+        btn.addEventListener('click', () => {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            let url = `http://192.168.1.93:3000?username=${username}&password=${password}`;
+            fetch(url, {
+                method:'GET'
+            }).then(res => {
+                return res.json();
+            }).then(data => {
+                console.log(data);
+            })
+        })
+    </script>
+</body>
+</html>

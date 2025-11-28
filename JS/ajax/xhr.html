@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">获取歌手信息</button>
+    <ul id="list">
+        <!-- <li>周杰伦</li> -->
+    </ul>
+    <script>
+        let btn = document.getElementById('btn');
+        btn.addEventListener('click', function() {
+            getData().then((arr) => {
+                renderList(arr);
+            })
+        })
+        function getData() {
+            return new Promise((resolve, reject) => {
+                // 向后端接口发送 http 请求
+                const xhr = new XMLHttpRequest();  // 创建了一个用于发请求的对象
+                xhr.open('GET', 'https://mock.mengxuegu.com/mock/66585c4db462b81cb3916d3e/songer/songer', true);
+                xhr.send();
+                xhr.onreadystatechange = function() {  // 监测请求的状态
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        const data = JSON.parse(xhr.responseText);
+                        // console.log(data);
+                        resolve(data.data);
+                    } else {
+                        
+                    }
+                }
+            })
+        }
+        function renderList(arr) {
+            // console.log('循环', arr);
+            let list = document.getElementById('list');
+            list.innerHTML = '';
+            for(let i = 0; i < arr.length; i++){
+                let item = arr[i];
+                let li = document.createElement('li');
+                li.innerText = item.name;
+                list.appendChild(li);
+            }
+        }
+    </script>
+</body>
+</html>
