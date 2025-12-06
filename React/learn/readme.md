@@ -10,3 +10,11 @@
 # create-react-app 包
 
 # vite
+
+# jsx
+1. jsx == js + xml(html)
+2. main.jsx 是整个项目的最外层的入口
+3. jsx 中只能放表达式，不能放语句
+4. 列表循环渲染
+5. 条件渲染
+6. 样式处理
