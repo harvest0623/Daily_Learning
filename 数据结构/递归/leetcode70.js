@@ -7,3 +7,4 @@ var climbStairs = function (n) {
     }
     return dp[n];
 };
+console.log(climbStairs(5)); 
