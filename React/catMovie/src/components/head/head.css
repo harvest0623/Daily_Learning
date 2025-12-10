@@ -1,0 +1,23 @@
+.header{
+    background-color: #67BA62;
+    padding: 15px;
+}
+.title{
+    color: #fff;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 18px;
+}
+.search-box{
+    width: 100%;
+    height: 34px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #A9A9A9;
+}
+.icon-fangdajing{
+    margin-right: 8px;
+}

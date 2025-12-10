@@ -1,0 +1,11 @@
+.item{
+    margin-right: 20px;
+}
+.pic{
+    width: 100px;
+    height: 150px;
+    overflow: hidden;
+}
+.pic img{
+    height: 100%;
+}

@@ -1,0 +1,20 @@
+.movie-list{
+    padding: 20px;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-title{
+    font-size: 20px;
+    font-weight: 700;
+}
+.more{
+    color: #6D9E5D;
+}
+.list{
+    display: flex;
+    overflow-x: scroll;
+    margin-top: 20px;
+}
