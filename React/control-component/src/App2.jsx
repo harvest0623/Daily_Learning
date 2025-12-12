@@ -6,17 +6,56 @@ const { Search } = Input
 
 export default function App () {
     // 获取列表
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
+
+    // 获取完整列表数据
+    const fetchList = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/data');
+            const data = await response.json();
+            setList(data);
+        } catch (error) {
+            console.error('获取列表失败:', error);
+        }
+    }
 
     // 删除
     const del = async (id) => {
-
+        try {
+            await fetch(`http://localhost:3000/data/${id}`, {
+                method: 'DELETE'
+            })
+            // 删除成功后重新获取列表
+            fetchList();
+        } catch (error) {
+            console.error('删除失败:', error);
+        }
     }
 
     // 搜索
     const onSearch = async (value) => {
-
+        try {
+            const response = await fetch('http://localhost:3000/data');
+            const data = await response.json();
+            if (value) {
+                // 过滤带有关键词的信息，搜索name和des字段
+                const filteredData = data.filter(item => 
+                    item.name.includes(value) || item.des.includes(value)
+                );
+                setList(filteredData);
+            } else {
+                // 如果搜索关键词为空，显示所有数据
+                setList(data);
+            }
+        } catch (error) {
+            console.error('搜索失败:', error);
+        }
     }
+
+    // 组件挂载时获取列表
+    useEffect(() => {
+        fetchList()
+    }, [])
 
     const columns = [
         {
