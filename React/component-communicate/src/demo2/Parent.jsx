@@ -5,7 +5,7 @@ export default function Parent() {
     const getNum = (n) => {
         setCount(n);
     }
-    console.log('hello');
+    // console.log('hello');
     return (
         <div>
             <h2>父组件二 -- {count}</h2>

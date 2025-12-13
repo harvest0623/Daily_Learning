@@ -3,7 +3,6 @@ import { createContext } from 'react';
 
 export const Context = createContext()  // 创建一个上下文对象
 export default function Parent() {
-
     return (
         <div>
         <h2> 父组件四 </h2>
