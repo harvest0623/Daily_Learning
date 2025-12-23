@@ -8,9 +8,25 @@
 <body>
     <h1>数据库</h1>
     <div class="box">
-        <input type="text" placeholder="请输入账号">
-        <input type="password" placeholder="请输入密码">
+        <input type="text" placeholder="请输入账号" class="account">
+        <input type="text" placeholder="请输入密码" class="password">
         <button>登录</button>
     </div>
+
+    <script>
+        const btn = document.querySelector('button');
+        btn.addEventListener('click', async() => {
+            const account = document.querySelector('.account').value;
+            const password = document.querySelector('.password').value;
+            if (!account || !password) {
+                alert('账号或密码不能为空');
+                return;
+            }
+
+            const res = await fetch(`http://localhost:3000/login?name=${account}&password=${password}`);
+            const data = await res.json();
+            console.log(data);
+        })
+    </script>
 </body>
 </html>
