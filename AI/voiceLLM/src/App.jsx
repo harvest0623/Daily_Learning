@@ -61,7 +61,6 @@ export default function App() {
             body: JSON.stringify(payload)
         })
         const data = await res.json();
-
         console.log(data.data);
 
         // 解析 base64 格式的资源
