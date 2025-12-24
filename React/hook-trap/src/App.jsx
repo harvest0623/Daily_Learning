@@ -5,8 +5,8 @@ import Trap from "./hooks/Trap"
 export default function App() {
     return (
         <div className="app">
-            {/* <State/> */}
-            {/* <Effect></Effect> */}
+            {/* <State/>
+            <Effect></Effect> */}
             <Trap></Trap>
         </div>
     )
