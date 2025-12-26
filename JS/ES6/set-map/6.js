@@ -10,6 +10,5 @@ btn.addEventListener('click', () => {
     btnClickCount.set(btn, count + 1);
     console.log('点击次数：', count + 1);
 });
-
 // 如果后续按钮被移除（比如btn = null），WeakMap里的键值对会自动回收，不会内存泄漏！
 // 要是用普通Map，即使btn被移除，Map依然持有强引用，内存会一直被占用，这就是差距~
