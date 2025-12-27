@@ -2,7 +2,6 @@
 //     const p = Math.random();
 //     return Math.floor(start * (1 - p) + end * p);
 // }
-
 // async function main({ params }: Args): Promise<Output> {
 //     if (params.position == null) params.position = random(0, 3);
 //     if (params.shooting_hand == null) params.shooting_hand = random(0, 2);
