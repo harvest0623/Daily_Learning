@@ -27,6 +27,7 @@ root.render(
         <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
 );
+
 createRoot(document.getElementById('root')).render(
     <div>
         <App />
