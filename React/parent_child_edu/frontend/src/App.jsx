@@ -9,7 +9,7 @@ import Home from './pages/Home'
 
 // 登录注册页面组件
 const AuthPage = () => {
-    const [activeTab, setActiveTab] = useState('login');
+    const [activeTab, setActiveTab] = useState('register');
     return (
         <div className="app-root">
             <div className="cartoon-bg"></div>

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const secretKey = 'parent_child_edu';
 
 const { findUserByPhone } = require('../models/userModel.js');
+const { generateCaptcha } = require('../utils/captcha.js');
 
 async function login(ctx) {
     // 解析请求体中的账号密码
@@ -55,6 +56,27 @@ async function login(ctx) {
     }   
 }
 
+// 生成图形验证码
+function getCaptcha(ctx) {
+    try {
+        const captcha = generateCaptcha();
+        ctx.body = {
+            message: '验证码获取成功',
+            captchaId: captcha.id,
+            captchaSvg: captcha.svg,
+            code: 1
+        }
+    } catch (error) {
+        ctx.status = 500;
+        ctx.body = {
+            message: '验证码获取失败',
+            code: 0,
+            error: error.message
+        }
+    }
+}
+
 module.exports = {
-    login
+    login,
+    getCaptcha
 }
