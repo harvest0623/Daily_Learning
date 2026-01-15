@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Layout from './pages/Layout'
 import AIPage from './pages/AIPage'
 import MinePage from './pages/MinePage'
+import Recognition from './pages/Recognition'
 
 // 登录注册页面组件
 const AuthPage = () => {
@@ -86,10 +87,10 @@ export default function App() {
                 <Route path='/' element={<Layout />}>
                     {/* 从定向 */}
                     <Route path='' element={<Navigate to='/home' />}></Route>
-                    <Route path='/home' element={<Home />}></Route>
-                    <Route path='/ai' element={<AIPage />}></Route>
-                    <Route path='/mine' element={<MinePage />}></Route>
-
+                    <Route path='/home' element={<Home/>}></Route>
+                    <Route path='/ai' element={<AIPage/>}></Route>
+                    <Route path='/mine' element={<MinePage/>}></Route>
+                    <Route path='/recognition' element={<Recognition/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

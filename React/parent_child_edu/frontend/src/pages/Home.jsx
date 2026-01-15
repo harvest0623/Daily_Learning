@@ -1,4 +1,4 @@
-import '../styles/home.less'
+import '../styles/Home.less'
 import HomeCard from '../components/HomeCard'
 
 export default function Home() {
