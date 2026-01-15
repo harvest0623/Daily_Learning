@@ -25,29 +25,25 @@ export default function Index({ theme = 'default', onRecognition }) {
         }
     };
     const currentTheme = themeConfig[theme] || themeConfig.default;
-    
+
     const handleImageUpload = (e) => {
-        const file = e.target.files[0]
+        // console.log(e.target.files[0]);
+        const file = e.target.files[0];
         if (file) {
-            // 将 file 对象转换成 url 
-            const imageUrl = URL.createObjectURL(file)
-            setSelectedImage(`${imageUrl}`)
+            // 将 file 对象转换成 url
+            const imageUrl = URL.createObjectURL(file);
+            // console.log(imageUrl);
+            setSelectedImage(imageUrl);
             // ai 识别
-            if (onRecognition) {
-                onRecognition(file)
-            }
+            onRecognition(file);
         }
     }
 
-    
-
     // 清除预览
     const handleClear = () => {
-        setSelectedImage(null)
-        fileInputRef.current.value = null
+        setSelectedImage(null);
+        fileInputRef.current.value = null;
     }
-
-
     return (
         <div className='image-capture-root'>
             <header className='image-capture-header'>
@@ -60,11 +56,10 @@ export default function Index({ theme = 'default', onRecognition }) {
 
             <main className="image-capture-main">
                 <section className="image-capture-preview" style={{
-                    background: `radial-gradient(circle at 20% 20%, ${currentTheme.gradient[0]} 0, transparent 35%),
+                    background: `radial-gradi ent(circle at 20% 20%, ${currentTheme.gradient[0]} 0, transparent 35%),
                       radial-gradient(circle at 90% 10%, ${currentTheme.gradient[1]} 0, transparent 40%),
                       #ffffff`}}
-                >
-                    {
+                >                        {
                         selectedImage ? (
                             <div className="image-capture-preview__image-container">
                                 <img src={selectedImage} alt="" className='image-capture-preview__image' />
