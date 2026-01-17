@@ -66,13 +66,11 @@ function getCaptcha(ctx) {
             error: error.message
         }
     }
-
 }
 
 // 注册
 async function register(ctx) {
     const { nickname, phone, captchaId, captchaCode, password } = ctx.request.body;
-
     if (!nickname || !phone || !password) {
         ctx.status = 400;
         ctx.body = {
@@ -130,7 +128,6 @@ async function register(ctx) {
             code: 0
         }
     }
-
 }
 
 module.exports = {

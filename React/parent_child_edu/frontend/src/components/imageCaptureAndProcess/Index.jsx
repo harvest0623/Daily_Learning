@@ -2,7 +2,12 @@ import { useState, useRef } from 'react';
 import './Index.less'
 import { useNavigate } from 'react-router-dom'
 
-export default function Index({ theme = 'default', onRecognition }) {
+export default function Index({
+    theme = 'default',
+    onRecognition,
+    recognitionResult,
+    children
+}) {
     const [selectedImage, setSelectedImage] = useState(null);
     const navigate = useNavigate();
     const fileInputRef = useRef(null);
@@ -101,6 +106,10 @@ export default function Index({ theme = 'default', onRecognition }) {
                         style={{ display: 'none' }}
                     />
                 </section>
+
+                {
+                    children
+                }
             </main>
         </div>
     )

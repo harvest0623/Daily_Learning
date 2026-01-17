@@ -1,8 +1,12 @@
-import ImageCaptureAndProcess from '../components/imageCaptureAndProcess/Index'
+import ImageCaptureAndProcess from '../components/imageCaptureAndProcess/Index.jsx'
 import axios from '../http'
+import { Toast } from 'antd-mobile'
+import { useState } from 'react'
+import RecognitionResult from '../components/recognitionResult/Index.jsx'
 
 // AI识物
 export default function Recognition() {
+    const [recognitionResult, setRecognitionResult] = useState(null);
     const realRecognition = async (file) => {
         try {
             // 将图片资源处理成 base64 
@@ -14,15 +18,37 @@ export default function Recognition() {
             })
 
             // 向工作流发请求
-            await axios.post('/api/coze/recognition', {
+            // 成功提示
+            Toast.show({
+                content: 'AI识别中...',
+                duration: 0,
+                icon: 'loading',
+                maskClickable: false
+            })
+            const res = await axios.post('/api/coze/recognition', {
                 img: dataUrl
             })
+            Toast.clear();
+            setRecognitionResult(res.data);
         } catch (error) {
-
+            // 失败提示
+            Toast.show({
+                content: error.message,
+                duration: 2000,
+                icon: 'fail',
+            })
         }
     }
 
     return (
-        <ImageCaptureAndProcess onRecognition={realRecognition}></ImageCaptureAndProcess>
+        <ImageCaptureAndProcess
+            onRecognition={realRecognition}
+        >
+            {
+                recognitionResult && (
+                    <RecognitionResult recognitionResult={recognitionResult}></RecognitionResult>
+                )
+            }
+        </ImageCaptureAndProcess>
     )
 }

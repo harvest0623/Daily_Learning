@@ -7,18 +7,22 @@ async function recognition(ctx) {
     try {
         const res = await axios({
             method: 'post',
-            url: 'https://3xksw7qxn9.coze.site/run',
+            url: 'https://dw66x8rp6x.coze.site/run',
             headers: {
                 'Authorization': `Bearer ${process.env.VITE_COZE_IMAGE_TO_TEXT_AND_VOICE}`,
                 'Content-Type': 'application/json'
             },
             data: params
         })
-        ctx.body = res.data;
-    } catch (error) {
-        console.log(error.response.data);
         ctx.body = {
-            status: 'error',
+            code: 1,
+            data: res.data
+        }
+    } catch (error) {
+        // console.log(error.response.data);
+        ctx.status = 500
+        ctx.body = {
+            code: 0,
             message: error.message
         }
     }

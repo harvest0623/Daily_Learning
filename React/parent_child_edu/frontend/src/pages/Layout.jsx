@@ -3,8 +3,8 @@ import '../styles/Layout.less'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 export default function Layout() {
-    const [activeTab, setActiveTab] = useState('home')
-    const navigate = useNavigate()
+    const [activeTab, setActiveTab] = useState('home');
+    const navigate = useNavigate();
 
     const tabs = [
         { id: 'home', path: '/home', name: '首页', icon: 'icon-shouye', },
