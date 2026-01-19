@@ -1,7 +1,18 @@
 import '../styles/MinePage.less'
-import { List, Card } from 'antd-mobile'
+import { useState, useRef } from 'react'
+import { List, Card, ActionSheet } from 'antd-mobile'
+import { useNavigate } from 'react-router-dom'
 
 export default function MinePage() {
+    const [visible, setVisible] = useState(false);
+    const navigate = useNavigate();
+    const actions = [
+        { text: '确认', key: 'confirm' }
+    ]
+    const handleLogout = () => {
+        // 弹框
+        setVisible(true);
+    }
     return (
         <div className="mine-page-root">
             <header className="mine-page-header">
@@ -20,7 +31,7 @@ export default function MinePage() {
                 <Card style={{
                     borderRadius: '16px'
                 }}
-                title='我的内容' headerStyle={{ height: '60px' }}>
+                    title='我的内容' headerStyle={{ height: '60px' }}>
                     <List header={null}>
                         <List.Item prefix={<i className="iconfont icon-wodeshoucang"></i>} onClick={() => { }}>
                             我的收藏
@@ -34,9 +45,9 @@ export default function MinePage() {
                 <Card style={{
                     borderRadius: '16px'
                 }}
-                title='设置' headerStyle={{ height: '60px' }}>
+                    title='设置' headerStyle={{ height: '60px' }}>
                     <List header={null}>
-                        <List.Item prefix={<i className="iconfont icon-zhanghao"></i>} onClick={() => { }}>
+                        <List.Item prefix={<i className="iconfont icon-zhanghao"></i>} onClick={() => { navigate('/AccountSetting') }}>
                             账号设置
                         </List.Item>
                         <List.Item prefix={<i className="iconfont icon-tongzhishezhi"></i>} onClick={() => { }}>
@@ -45,12 +56,28 @@ export default function MinePage() {
                         <List.Item prefix={<i className="iconfont icon-bangzhuzhongxin"></i>} onClick={() => { }}>
                             帮助中心
                         </List.Item>
-                        <List.Item prefix={<i className="iconfont icon-tuichudenglu"></i>} onClick={() => { }}>
+                        <List.Item prefix={<i className="iconfont icon-tuichudenglu"></i>} onClick={handleLogout}>
                             退出登录
                         </List.Item>
                     </List>
                 </Card>
             </div>
+
+            <ActionSheet
+                visible={visible}
+                actions={actions}
+                cancelText="取消"
+                onClose={() => setVisible(false)}
+                onAction={(action, index) => {
+                    // console.log(action);
+                    if (action.key === 'confirm') {
+                        // 确认退出登录
+                        setVisible(false);
+                        localStorage.removeItem('token');
+                        navigate('/login');
+                    }
+                }}  
+            />
         </div>
     )
 }

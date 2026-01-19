@@ -16,7 +16,13 @@ async function createUser({ phone, passwordHash, nickname }) {
     }
 }
 
+async function findUserById(id) {
+    const [rows] = await db.execute('SELECT * FROM users WHERE id = ? LIMIT 1', [id]);
+    return rows[0];
+}
+
 module.exports = {
     findUserByPhone,
-    createUser
+    createUser,
+    findUserById
 }

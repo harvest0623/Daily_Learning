@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { findUserByPhone, createUser } = require('../models/userModel.js');
+const { findUserByPhone, createUser, findUserById } = require('../models/userModel.js');
 const { generateCaptcha, verifyCaptcha } = require('../utils/captcha.js');
 
 
@@ -130,8 +130,34 @@ async function register(ctx) {
     }
 }
 
+// 获取用户信息
+async function getUserInfo(ctx) {
+    const id = ctx.userId;
+    try {
+        const res = await findUserById(id);
+        console.log(res);
+        const data = {
+            code: 1,
+            message: '获取用户信息成功',
+            id: res.id,
+            create_time: res.created_time,
+            phone: res.phone,
+            nickname: res.nickname,
+            avatar: res.avatar
+        }
+        ctx.body = data;
+    } catch (error) {
+        ctx.status = 400;
+        ctx.body = {
+            code: 0,
+            message: '获取用户信息失败'
+        }
+    }
+}
+
 module.exports = {
     login,
     getCaptcha,
-    register
+    register,
+    getUserInfo
 }

@@ -12,6 +12,7 @@ import Layout from './pages/Layout'
 import AIPage from './pages/AIPage'
 import MinePage from './pages/MinePage'
 import Recognition from './pages/Recognition'
+import AccountSetting from './pages/AccountSetting'
 
 
 // 登录注册页面组件
@@ -86,6 +87,7 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/login' element={<AuthPage />}></Route>
+
                 <Route path='/' element={<Layout />}>
                     {/* 从定向 */}
                     <Route path='' element={<Navigate to='/home' />}></Route>
@@ -94,6 +96,8 @@ export default function App() {
                     <Route path='/mine' element={<MinePage/>}></Route>
                     <Route path='/recognition' element={<Recognition/>}></Route>
                 </Route>
+                
+                <Route path='/AccountSetting' element={<AccountSetting/>}></Route>
             </Routes>
         </BrowserRouter>
     )
