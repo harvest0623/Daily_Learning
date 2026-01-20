@@ -6,7 +6,7 @@ async function findUserByPhone(phone) {
 }
 
 async function createUser({ phone, passwordHash, nickname }) {
-    const [res] = await db.execute('INSERT INTO users (phone, password_hash, create_time, nickname) VALUES (?, ?, NOW(), ?)', [phone, passwordHash, nickname]);
+    const [res] = await db.execute('INSERT INTO users (phone, password_hash, create_time, nickname, gender) VALUES (?, ?, NOW(), ?, 1)', [phone, passwordHash, nickname]);
     // console.log(res);
     if (res.affectedRows) {
         return {

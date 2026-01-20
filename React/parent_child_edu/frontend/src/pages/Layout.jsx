@@ -2,15 +2,22 @@ import { useState } from 'react'
 import '../styles/Layout.less'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-export default function Layout() {
-    const [activeTab, setActiveTab] = useState('home');
-    const navigate = useNavigate();
+const tabs = [
+    { id: 'home', path: '/home', name: '首页', icon: 'icon-shouye', },
+    { id: 'ai', path: '/ai', name: 'AI小伙伴', icon: 'icon-Al-Chatbot', isHightLighted: true },
+    { id: 'mine', path: '/mine', name: '我的', icon: 'icon-wode' }
+];
 
-    const tabs = [
-        { id: 'home', path: '/home', name: '首页', icon: 'icon-shouye', },
-        { id: 'ai', path: '/ai', name: 'AI小伙伴', icon: 'icon-Al-Chatbot', isHightLighted: true },
-        { id: 'mine', path: '/mine', name: '我的', icon: 'icon-wode' }
-    ];
+export default function Layout() {
+    const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState(() => {
+        // console.log(window.location.pathname);
+        const res = tabs.filter((tab) => {
+            return tab.path === window.location.pathname;
+        })
+        // console.log(res);
+        return res[0] ? res[0].id : 'home';
+    });
 
     return (
         <div className='layout'>

@@ -143,7 +143,8 @@ async function getUserInfo(ctx) {
             create_time: res.created_time,
             phone: res.phone,
             nickname: res.nickname,
-            avatar: res.avatar
+            avatar: res.avatar,
+            gender: res.gender === '男' ? '男' : '女'
         }
         ctx.body = data;
     } catch (error) {
