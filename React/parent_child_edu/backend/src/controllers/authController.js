@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { findUserByPhone, createUser, findUserById } = require('../models/userModel.js');
+const { findUserByPhone, createUser, findUserById, updateUserInfo } = require('../models/userModel.js');
 const { generateCaptcha, verifyCaptcha } = require('../utils/captcha.js');
 
 
@@ -156,9 +156,38 @@ async function getUserInfo(ctx) {
     }
 }
 
+// 更新用户信息
+async function updateUser(ctx) {
+    const id = ctx.userId;
+    const params = ctx.request.body;
+    // console.log(res);
+    try {
+        const res = await updateUserInfo(params, id);
+        if (res.affectedRows) {
+            ctx.body = {
+                message: '更新成功',
+                code: 1
+            }
+        } else {
+            ctx.status = 400;
+            ctx.body = {
+                message: '更新失败',
+                code: 0
+            }
+        }
+    } catch (error) {
+        ctx.status = 500;
+        ctx.body = {
+            message: error.message,
+            code: 0
+        }
+    }
+}
+
 module.exports = {
     login,
     getCaptcha,
     register,
-    getUserInfo
+    getUserInfo,
+    updateUser
 }

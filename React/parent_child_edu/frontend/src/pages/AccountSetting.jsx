@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { List, Switch, Avatar, ActionSheet, Toast, ImageViewer } from 'antd-mobile'
+import { List, Switch, Avatar, ActionSheet, Toast, ImageViewer, Popup, Button, Input } from 'antd-mobile'
 import axios from '../http'
 import '../styles/AccountSetting.less'
 
@@ -14,9 +14,10 @@ export default function AccountSetting() {
     const [nickname, setNickname] = useState('');
     const [account, setAccount] = useState('');
     const [gender, setGender] = useState('');
-    const [visibleImage, setVisibleImage] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [visibleImage, setVisibleImage] = useState(false);
     const [previewAvatar, setPreviewAvatar] = useState('')
+    const [visiblePopup, setVisiblePopup] = useState(false)
     const fileInputRef = useRef(null);
 
     const handleAvatarChange = (e) => {
@@ -27,9 +28,6 @@ export default function AccountSetting() {
         reader.readAsDataURL(file);
         reader.onload = () => {
             setPreviewAvatar(reader.result);
-        };
-        reader.onerror = () => {
-            setVisibleImage(false);
         };
     }
 
@@ -48,12 +46,20 @@ export default function AccountSetting() {
             const params = {
                 avatar: previewAvatar
             };
-            const res = await axios.post('api/auth/uploadAvatar', params);
-            console.log(res.data);
+            const res = await axios.post('/api/auth/updateAvatar', params);
+            // console.log(res);
+            Toast.show({
+                content: res.data.message,
+                duration: 2000,
+                icon: 'success'
+            })
+            setVisibleImage(false);
+            setAvatar(previewAvatar);
+            fileInputRef.current.value = '';  // 保证下一次上传同一张图也会触发onChange
         } catch (error) {
             // console.log(error);
             Toast.show({
-                content: '上传失败',
+                content: error.message,
                 duration: 2000,
                 icon: 'fail'
             })
@@ -69,9 +75,6 @@ export default function AccountSetting() {
                 setNickname(res.data.nickname);
                 setAccount(res.data.phone);
                 setGender(res.data.gender === '男' ? '男' : '女');
-            })
-            .catch(err => {
-                console.log(err);
             })
     }, []);
 
@@ -92,10 +95,10 @@ export default function AccountSetting() {
                     <List.Item extra={<Avatar style={{ '--border-radius': '50%' }} src={avatar} />} clickable onClick={() => setVisible(true)}>
                         头像
                     </List.Item>
-                    <List.Item extra={nickname} clickable >
+                    <List.Item extra={nickname} clickable onClick={() => setVisiblePopup(true)}>
                         昵称
                     </List.Item>
-                    <List.Item extra={gender} clickable={() => setVisible(true)}>
+                    <List.Item extra={gender} clickable>
                         性别
                     </List.Item>
                     <List.Item extra={account} clickable>
@@ -145,6 +148,25 @@ export default function AccountSetting() {
                     </div>
                 )}
             />
+
+            <Popup
+                visible={visiblePopup}
+                showCloseButton
+                onClose={() => setVisiblePopup(false)}
+                position='right'
+            >
+                <div className="update-nickname">
+                    <div className="update-nickname__title">新昵称：</div>
+                    <div className="update-nickname__input-container">
+                        <Input
+                            placeholder="请输入新昵称"
+                            value={nickname}
+                            onChange={(val) => setNickname(val)}
+                        />
+                    </div>
+                </div>
+                <Button type='primary' block className='update-nickname__confirm'>确认</Button>
+            </Popup>
         </div>
     )
 }

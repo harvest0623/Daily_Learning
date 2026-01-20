@@ -13,7 +13,13 @@ function verifyToken() {
                     await next();
                 }
             } catch (error) {
-                
+                // console.log(error);
+                ctx.status = 416;
+                ctx.body = {
+                    code: 0,
+                    message: 'token 无效'
+                }
+                return;
             }
         } else {
             ctx.status = 416;
