@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 2000px;
+        }
+        #box{
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            margin: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        const io = new IntersectionObserver(
+            () => {
+                console.log('hello');
+            },
+            {
+                threshold: [0, 0.25, 0.5, 0.75, 1.0]
+            }
+        )
+        io.observe(document.getElementById('box'));
+    </script>
+</body>
+</html>
