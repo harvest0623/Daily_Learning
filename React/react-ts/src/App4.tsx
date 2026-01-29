@@ -31,6 +31,7 @@ export default function App4() {
         console.log('cb');
         return 666;
     }, [])
+    
     return (
         <div>
             <div onClick={() => dispatch({type: 'add', num: 2})}>加</div>
