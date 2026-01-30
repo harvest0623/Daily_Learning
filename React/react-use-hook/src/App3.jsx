@@ -11,7 +11,7 @@ export default function App3() {
     return (
         <div>
             {hoverable}
-            {hovered ? 'yes' : 'no'}
+            {hovered ? 'yes ✅' : 'no ❌'}
         </div>
     )
 }

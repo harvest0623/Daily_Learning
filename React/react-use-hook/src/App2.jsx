@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import {useLifecycles} from 'react-use';
+import useLifecycles from './hooks/useLifecycles';
 
 const Child = () => {
     useLifecycles(
         () => {
-            console.log('child组件挂载');
+            console.log('child组件挂载🎬');
         },
         () => {
-            console.log('child组件卸载');   
+            console.log('child组件卸载👋');   
         }
     )
     return <h1>child组件</h1>
