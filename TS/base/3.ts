@@ -24,8 +24,8 @@ let value: unknown = 10;
 value = '123';
 
 let abc: string = 'hello';
-// abc = value;   报错
-abc = notSure;
+// abc = value;    // 报错
+abc = notSure;  // 不会报错，因为 any 类型可以随便变
 
 let tuple: [number, string] = [10, 'hello'];
 
