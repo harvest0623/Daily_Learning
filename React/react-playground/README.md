@@ -30,3 +30,12 @@ npm i @monaco-editor/react
 iframe 标签
 
 左侧的 tsx 代码被编译，编译完后引入带一个 html文件中，并将这个 html 文件展示在iframe中
+
+# allotment 拖拽组件
+npm i allotment
+
+# 样式隔离
+index.module.scss 将组件的样式隔离起来，不会影响到其他组件的样式
+
+# 编辑器 @monaco-editor/react
+第三方的库需要代码提示：@typescript/ata
