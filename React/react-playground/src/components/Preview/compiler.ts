@@ -4,11 +4,19 @@ import { transform } from '@babel/standalone'
 import type { BabelFileResult, PluginObj } from '@babel/core';
 import type { EditorFile } from "../CodeEditor/Editor";
 
+const beforeTransformCode = (filename: string, code: string) => {
+    const regexReact = /import\s+React/g;
+    if ((filename.endsWith('.tsx') || filename.endsWith('.jsx')) && !regexReact.test(code)) {
+        return `import React from 'react';\n${code}`;
+    }
+    return code;
+}
+
 export const babelTransform = (filename: string, code: string, files: Files) => {
-    
+    let _code = beforeTransformCode(filename, code);
     let res = '';
     try {
-        res = transform(code, {
+        res = transform(_code, {
             presets: ['react', 'typescript'],
             filename,
             plugins: [customResolver(files)],  // 需要一个插件，在编译的过程中将 import 引入的文件路径替换为 blob

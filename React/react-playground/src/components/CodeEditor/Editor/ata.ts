@@ -15,10 +15,10 @@ export function createATA(onDownloadFile: (code: string, path: string) => void) 
                 console.log("ATA start");
             },
             progress: (downloaded: number, total: number) => {
-                console.log(`Got ${downloaded} out of ${total}`);
+                // console.log(`Got ${downloaded} out of ${total}`);
             },
             finished: vfs => {
-                console.log("ATA done", vfs);
+                // console.log("ATA done", vfs);
             },
         },
     })
