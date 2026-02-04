@@ -37,9 +37,9 @@ function customResolver(files: Files): PluginObj {
                         path.node.source.value = JsonToJS(file);
                     } else {
                         path.node.source.value = URL.createObjectURL(
+                            // 递归将引入的文件也编译成 js
                             new Blob([babelTransform(file.name, file.value, files)], { type: 'application/javascript' })
                         );
-                        return;
                     }
                 }
             }
